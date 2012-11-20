@@ -2,7 +2,7 @@
  *
  */
 
-#include "pi_spidevice.hpp"
+#include "pi_spi.hpp"
 #include <stdexcept>
 
 #include <fcntl.h>
