@@ -9,7 +9,7 @@
 
 #include <iostream>
 #include <exception>
-#include "../src/pi_i2c.hpp"
+#include <rasp/pi_i2c.hpp>
 
 using namespace RaspberryPi;
 using namespace std;

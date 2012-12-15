@@ -68,11 +68,10 @@ int SPIDevice::Open()
     return 0;
 }
 
-
 int SPIDevice::Open(string device)
 {
     this->m_device = device;
-    this->Open();
+    return this->Open();
 }
 
 int SPIDevice::Open(string device, SpiMode_t mode, int bits_per_word, long max_speed)
@@ -81,7 +80,7 @@ int SPIDevice::Open(string device, SpiMode_t mode, int bits_per_word, long max_s
     this->m_mode   = mode;
     this->m_bitsperword = bits_per_word;
     this->m_maxspeed = max_speed;
-    this->Open();
+    return this->Open();
 }
 
 int SPIDevice::Close()
@@ -89,6 +88,7 @@ int SPIDevice::Close()
     close(this->m_fd);
     this->m_fd = 0;
     this->m_isopen = false;
+    return 0;
 }
 
 int SPIDevice::Speed()
@@ -116,7 +116,8 @@ int SPIDevice::_transfer(char* buff_wr, int len, int usec)
     if(ioctl(this->m_fd, SPI_IOC_MESSAGE(1), &spi_s) < 0){
         throw std::runtime_error("error during transfer");
     }
- 
+
+    return 0;
 }
 
 string SPIDevice::Transfer(string data, int delay_usec)

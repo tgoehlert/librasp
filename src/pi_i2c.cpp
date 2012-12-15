@@ -64,13 +64,13 @@ int I2CDevice::Open(string device, u16 slave_address)
 {
     this->m_slave_address = slave_address;
     this->m_device = device;
-    this->Open();
+    return this->Open();
 }
 
 int I2CDevice::Open(string device)
 {
     this->m_device = device;
-    this->Open();
+    return this->Open();
 }
 
 int I2CDevice::Close()
@@ -78,6 +78,7 @@ int I2CDevice::Close()
     close(this->m_fd);
     this->m_fd = 0;
     this->m_isopen = false;
+    return 0;
 }
 
 u16 I2CDevice::SlaveAddress()
@@ -100,6 +101,7 @@ u8 I2CDevice::Read()
     u8 recvbuff = 0x00;
     if(read(this->m_fd,(void*)&recvbuff,1) != 1)
         throw std::runtime_error("error receiving byte");
+    return recvbuff;
 }
 
 int I2CDevice::Read(u8* recvbuff,int len)
@@ -122,9 +124,12 @@ int I2CDevice::Write(u8 buff,u8 command)
     int result = write(this->m_fd, &tmp_buff, 3);
     if(result < 0)
         throw std::runtime_error("error sending byte");
+
+    return result;
 }
 
 int I2CDevice::Write(u8 *buff,int len, u8 command)
 {
-   //TODO: needs to be implemented 
+   //TODO: needs to be implemented
+   return 0;
 }
